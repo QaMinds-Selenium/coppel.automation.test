@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TS_DESKTOP_HOMECOPPEL">
+
+    <test name="HOMECOPPEL">
+<!--        <parameter name="platform" value="desktop"/>-->
+        <classes>
+            <class name="TEST"/>
+        </classes>
+    </test>
+
+</suite>
