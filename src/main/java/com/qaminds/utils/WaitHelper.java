@@ -1,4 +1,4 @@
-package utils;
+package com.qaminds.utils;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.FluentWait;
