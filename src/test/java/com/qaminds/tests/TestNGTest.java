@@ -2,10 +2,20 @@ package com.qaminds.tests;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 @Slf4j
 public class TestNGTest {
+
+    @BeforeSuite
+    public void BeforeSuite(){
+        log.info("Se ejecuto el Before Suite");
+    }
+
+    @BeforeTest
+    public void BeforeTest(){
+        log.info("Se ejecuta el Before Test");
+    }
 
     @Test(priority = 3, dependsOnMethods = "TestFour")
     public void TestOne(){
