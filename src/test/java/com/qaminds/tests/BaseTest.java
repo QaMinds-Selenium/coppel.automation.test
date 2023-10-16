@@ -12,8 +12,6 @@ import org.testng.annotations.BeforeTest;
 @Getter
 public class BaseTest {
     private WebDriver driver;
-
-
     @BeforeTest
     public void beforeTest(){
         WebDriverManager.chromedriver().setup();
