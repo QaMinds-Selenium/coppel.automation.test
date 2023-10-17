@@ -4,12 +4,12 @@ import com.qaminds.pages.HomePage;
 import com.qaminds.pages.Pages;
 import com.qaminds.tests.BaseTest;
 import lombok.extern.slf4j.Slf4j;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 public class SearchInputTest extends BaseTest {
-
 
 
 
@@ -22,6 +22,7 @@ public class SearchInputTest extends BaseTest {
         Pages.returnHomePage(getDriver()).InputSearch("Pantalla");
 
         log.info("Step 3: Click on Button Search");
+        getDriver().manage().deleteAllCookies();
         Pages.returnHomePage(getDriver()).clickButtonSearch();
 //        getDriver().get("https://coppel.com/pantalla-led");
 

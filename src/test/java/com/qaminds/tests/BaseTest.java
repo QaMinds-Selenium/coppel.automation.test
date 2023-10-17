@@ -21,17 +21,18 @@ public class BaseTest {
 
     @BeforeMethod
     public void beforeTest(){
-        ChromeOptions handlingSSL = new ChromeOptions();
-        handlingSSL.setAcceptInsecureCerts(false);
+//        ChromeOptions handlingSSL = new ChromeOptions();
+//        handlingSSL.setAcceptInsecureCerts(false);
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--disable-http2");
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(handlingSSL);
-        driver.manage().window().maximize();
+        driver = new ChromeDriver();
+
 //        WebDriverManager.safaridriver().setup();
 //        driver = new SafariDriver();
 //        WebDriverManager.firefoxdriver().setup();
 //        driver = new FirefoxDriver();
         driver.manage().window().maximize();
-
     }
 
     @AfterMethod
@@ -40,8 +41,8 @@ public class BaseTest {
     }
 
     public void navigateTo(String _url){
-        String url = String.format("http://%s", _url);
-        getDriver().get(url);
+        String url = String.format("https://%s", _url);
+        getDriver().navigate().to(url);
 
         if(!getDriver().getCurrentUrl().contains(_url)){
             log.info("Browser could not get to the requested Webpage");
