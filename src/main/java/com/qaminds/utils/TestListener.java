@@ -16,7 +16,7 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-        log.error("Screenshot error: {}", ScreenshotHelpers.screenshot(WebDriverConfiguration.getDriver()));
+        log.error("Screenshot error: {}", ScreenshotHelpers.screenshot());
         log.error("--------- Failed Test : {} ----------", result.getName());
         log.error("{}", result.getThrowable().getMessage());
     }

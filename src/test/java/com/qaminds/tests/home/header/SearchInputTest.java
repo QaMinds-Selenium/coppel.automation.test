@@ -4,6 +4,7 @@ import com.qaminds.pages.Pages;
 import com.qaminds.tests.BaseTest;
 import com.qaminds.utils.WebDriverConfiguration;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -18,13 +19,13 @@ public class SearchInputTest extends BaseTest {
         navigateTo("coppel.com");
 
         log.info("Step 2: Into product name to search");
-        Pages.returnHomePage(WebDriverConfiguration.getDriver()).InputSearch("Sillon");
+        Pages.returnHomePage(getDriver()).InputSearch("Sillon");
 
         log.info("Step 3: Click on ButtonSearch");
-        Pages.returnHomePage(WebDriverConfiguration.getDriver()).clickButtonSearch();
+        Pages.returnHomePage(getDriver()).clickButtonSearch();
 
         log.info("Step validate: Validate that show ListProductPage");
-        assertThat(Pages.returnListProductPage(WebDriverConfiguration.getDriver()).isDisplayContainerResults())
+        assertThat(Pages.returnListProductPage(getDriver()).isDisplayContainerResults())
                 .as("No se encontro disponible el elemento.")
                 .isTrue();
     }
@@ -43,7 +44,7 @@ public class SearchInputTest extends BaseTest {
         navigateTo(url);
 
         log.info("Step validate: Validate that show ListProductPage");
-        assertThat(Pages.returnListProductPage(WebDriverConfiguration.getDriver()).isDisplayLabel())
+        assertThat(Pages.returnListProductPage(getDriver()).isDisplayLabel())
                 .as("No se encontro disponible el elemento.")
                 .containsIgnoringCase(dataTest);
     }

@@ -1,16 +1,27 @@
 package com.qaminds.utils;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.openqa.selenium.WebDriver;
 
+@Getter
+@Setter
 public class WebDriverConfiguration {
 
-    private static WebDriver driver;
+    private WebDriver driver;
+
+    private static WebDriverConfiguration webDriverConfiguration;
 
     public WebDriverConfiguration(WebDriver driver){
-        WebDriverConfiguration.driver = driver;
+        setDriver(driver);
     }
 
-    public static WebDriver getDriver(){
-        return driver;
+    public static WebDriverConfiguration getInstance(WebDriver driver){
+        if(webDriverConfiguration == null){
+            webDriverConfiguration = new WebDriverConfiguration(driver);
+        }
+        return webDriverConfiguration;
     }
 }

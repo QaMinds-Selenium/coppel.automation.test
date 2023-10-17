@@ -18,13 +18,15 @@ import java.util.Date;
 public class ScreenshotHelpers{
 
     private static String directory = "";
+    private static WebDriver driver;
 
-    public ScreenshotHelpers(){
+    public ScreenshotHelpers(WebDriver driver){
+        this.driver = driver;
         String currentWorkingDirectory = System.getProperty("user.dir");
         directory = String.format("%s/src/test/resources/screenshot/%s", currentWorkingDirectory, new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date()));
     }
 
-    public static String screenshot(WebDriver driver){
+    public static String screenshot(){
         String fileName = String.format("screenshot_%s.png", new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date()));
 
         File dirScreenshot = new File(directory);

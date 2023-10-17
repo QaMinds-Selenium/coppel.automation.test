@@ -5,6 +5,7 @@ import com.qaminds.utils.TestListener;
 import com.qaminds.utils.WebDriverConfiguration;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,28 +15,33 @@ import org.testng.annotations.*;
 import java.lang.reflect.Method;
 
 @Slf4j
+@Setter
+@Getter
 @Listeners(TestListener.class)
-public class BaseTest {
+public class BaseTest{
+
+    WebDriver driver;
 
     @BeforeMethod
     public void beforeMethod(Method method){
         WebDriverManager.chromedriver().setup();
-        new WebDriverConfiguration(new ChromeDriver());
-        new ScreenshotHelpers();
-        WebDriverConfiguration.getDriver().manage().window().maximize();
+        setDriver(WebDriverConfiguration.getInstance(new ChromeDriver()).getDriver());
+        getDriver().manage().deleteAllCookies();
+        new ScreenshotHelpers(getDriver());
+        getDriver().manage().window().maximize();
     }
 
     @AfterMethod
     public void afterMethod(ITestResult testResult){
         log.info("Close browser");
-        WebDriverConfiguration.getDriver().quit();
+        getDriver().quit();
     }
 
     public void navigateTo(String _url){
         String url = String.format("http://%s", _url);
-        WebDriverConfiguration.getDriver().get(url);
+        getDriver().get(url);
 
-        if(!WebDriverConfiguration.getDriver().getCurrentUrl().contains(_url)){
+        if(!getDriver().getCurrentUrl().contains(_url)){
             log.error(String.format("El navegador no pudo navegar a la pagina solicitada."));
             throw new RuntimeException("No se encontro : " + url);
         }
