@@ -1,8 +1,12 @@
 package com.qaminds.utils;
 
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestListener;
+import org.testng.ITestResult;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,16 +14,17 @@ import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ScreenshotHelpers {
+@Slf4j
+public class ScreenshotHelpers{
 
-    private final String directory;
+    private static String directory = "";
 
     public ScreenshotHelpers(){
         String currentWorkingDirectory = System.getProperty("user.dir");
-        this.directory = String.format("%s/src/test/resources/screenshot/%s", currentWorkingDirectory, new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date()));
+        directory = String.format("%s/src/test/resources/screenshot/%s", currentWorkingDirectory, new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date()));
     }
 
-    public String screenshot(WebDriver driver){
+    public static String screenshot(WebDriver driver){
         String fileName = String.format("screenshot_%s.png", new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date()));
 
         File dirScreenshot = new File(directory);

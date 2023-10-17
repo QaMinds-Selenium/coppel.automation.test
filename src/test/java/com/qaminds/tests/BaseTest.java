@@ -1,45 +1,42 @@
 package com.qaminds.tests;
 
 import com.qaminds.utils.ScreenshotHelpers;
+import com.qaminds.utils.TestListener;
+import com.qaminds.utils.WebDriverConfiguration;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
+
+import java.lang.reflect.Method;
 
 @Slf4j
-@Getter
+@Listeners(TestListener.class)
 public class BaseTest {
 
-    private WebDriver driver;
-    private ScreenshotHelpers screenshotHelpers;
-
-    @BeforeSuite
-    public void beforeSuite(){
-        screenshotHelpers = new ScreenshotHelpers();
-    }
-
-    @BeforeTest
-    public void beforeTest(){
+    @BeforeMethod
+    public void beforeMethod(Method method){
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        new WebDriverConfiguration(new ChromeDriver());
+        new ScreenshotHelpers();
+        WebDriverConfiguration.getDriver().manage().window().maximize();
     }
 
-    @AfterTest
-    public void afterTest(){
-        getDriver().quit();
+    @AfterMethod
+    public void afterMethod(ITestResult testResult){
+        log.info("Close browser");
+        WebDriverConfiguration.getDriver().quit();
     }
 
     public void navigateTo(String _url){
         String url = String.format("http://%s", _url);
-        getDriver().get(url);
+        WebDriverConfiguration.getDriver().get(url);
 
-        if(!getDriver().getCurrentUrl().contains(_url)){
-            log.error(String.format("El navegador no pudo navegar a la pagina solicitada. %s", screenshotHelpers.screenshot(getDriver())));
+        if(!WebDriverConfiguration.getDriver().getCurrentUrl().contains(_url)){
+            log.error(String.format("El navegador no pudo navegar a la pagina solicitada."));
             throw new RuntimeException("No se encontro : " + url);
         }
     }
