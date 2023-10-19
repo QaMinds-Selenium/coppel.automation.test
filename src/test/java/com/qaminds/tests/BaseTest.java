@@ -1,7 +1,8 @@
 package com.qaminds.tests;
 
 import com.qaminds.utils.ScreenshotHelpers;
-import com.qaminds.utils.TestListener;
+import com.qaminds.utils.reporter.ReporterManager;
+import com.qaminds.utils.reporter.ReporterTestListener;
 import com.qaminds.utils.WebDriverConfiguration;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
@@ -17,24 +18,31 @@ import java.lang.reflect.Method;
 @Slf4j
 @Setter
 @Getter
-@Listeners(TestListener.class)
+@Listeners(ReporterTestListener.class)
 public class BaseTest{
 
     WebDriver driver;
+    private boolean isSuite = false;
+
+    @BeforeSuite
+    public void beforeSuite(){
+        setSuite(true);
+        log.debug("Create the report html in the before Suite");
+        ReporterManager.createReportHTML();
+    }
 
     @BeforeMethod
     public void beforeMethod(Method method){
+        if(!isSuite()){
+            log.debug("Create the report html in the Test");
+            ReporterManager.createReportHTML();
+        }
+        ReporterManager.createTest(method.getName());
         WebDriverManager.chromedriver().setup();
         setDriver(WebDriverConfiguration.getInstance(new ChromeDriver()).getDriver());
         getDriver().manage().deleteAllCookies();
         new ScreenshotHelpers(getDriver());
         getDriver().manage().window().maximize();
-    }
-
-    @AfterMethod
-    public void afterMethod(ITestResult testResult){
-        log.info("Close browser");
-        getDriver().quit();
     }
 
     public void navigateTo(String _url){
@@ -46,4 +54,19 @@ public class BaseTest{
             throw new RuntimeException("No se encontro : " + url);
         }
     }
+
+    @AfterMethod
+    public void afterMethod(ITestResult testResult){
+        if(!isSuite()){
+            ReporterManager.extentFlush();
+        }
+        log.info("Close browser");
+        getDriver().quit();
+    }
+
+    @AfterSuite
+    public void afterSuite(){
+        ReporterManager.extentFlush();
+    }
+
 }
