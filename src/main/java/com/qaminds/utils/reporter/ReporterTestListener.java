@@ -39,6 +39,6 @@ public class ReporterTestListener implements ITestListener {
     public void onFinish(ITestContext context) {
         log.info("--------- {} Tests Failed----------", context.getFailedTests().size());
         log.info("--------- {} Tests Success----------", context.getPassedTests().size());
-//        EmailSender.sendEmail(ReporterManager.getReportHTMLPath());
+        EmailSender.sendEmail(ReporterManager.getReportHTMLPath());
     }
 }

@@ -46,7 +46,7 @@
     <!-- custom styles -->
     <styles>
       <![CDATA[
-      
+        .test-status.pass { background: green; color: white; }
       ]]>
     </styles>
 

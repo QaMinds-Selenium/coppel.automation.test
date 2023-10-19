@@ -1,5 +1,6 @@
 package com.qaminds.pages;
 
+import com.qaminds.utils.WaitsHelpers;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -34,7 +34,7 @@ public class ReporterManager {
                         .viewOrder()
                         .as(new ViewName[] { ViewName.DASHBOARD, ViewName.TEST })
                         .apply();
-//                configureReporter(reporter);
+                configureReporter(reporter);
                 extent = new ExtentReports();
                 extent.attachReporter(reporter);
             } catch (Exception e) {
