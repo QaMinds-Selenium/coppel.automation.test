@@ -15,45 +15,75 @@
     </properties>
 
     <dependencies>
+        <!-- TestNG es un framework de pruebas diseñado para simplificar una amplia gama de necesidades de pruebas. -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.7.1</version>
-            <scope>test</scope>
         </dependency>
+
+        <!-- Selenium permite automatizar las operaciones del navegador web. -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.13.0</version>
         </dependency>
+
+        <!-- WebDriverManager ayuda a gestionar el controlador binario requerido por los navegadores web utilizados por Selenium. -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>5.5.3</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- AssertJ proporciona ricas y fáciles de usar aserciones para mejorar la legibilidad del código de prueba. -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>3.24.2</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Lombok ayuda a reducir el código boilerplate mediante la generación de constructores, getters, setters, etc. -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.30</version>
-            <scope>test</scope>
         </dependency>
+
+        <!-- SLF4J es una abstracción para frameworks de logging. -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>2.0.9</version>
         </dependency>
+
+        <!-- Logback Classic y Core proporcionan implementación para SLF4J y configuración de logging. -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>2.0.9</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.4.11</version>
+        </dependency>
+
+        <!-- ExtentReports proporciona capacidades de reporting para las pruebas. -->
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>5.1.1</version>
+        </dependency>
+
+        <!-- Jakarta Mail permite el envío de emails desde Java. -->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>jakarta.mail</artifactId>
+            <version>2.0.1</version>
         </dependency>
     </dependencies>
-
 </project>
