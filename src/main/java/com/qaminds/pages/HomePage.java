@@ -12,10 +12,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.time.Duration;
+
 @Slf4j
 public class HomePage {
 
     WebDriver driver;
+    WaitsHelpers wait;
+
+    public HomePage(){
+        wait = new WaitsHelpers(driver);
+    }
 
     @FindBy(id = "SimpleSearchForm_SearchTerm")
     private WebElement inputSearch;
@@ -25,6 +32,11 @@ public class HomePage {
 
     public void InputSearch(String product){
         log.debug("first click on InputSearch in HomePage");
+
+        if(wait.waitForElementIsVisivility(inputSearch, 20, 2)){
+            inputSearch.click();
+        }
+
         inputSearch.click();
 
         log.debug("into product for search");

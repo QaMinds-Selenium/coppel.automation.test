@@ -43,7 +43,7 @@ public class WaitsHelpers {
         });
     }
 
-    public boolean waitForElement(By locator /* By.id("id") */, int timeout /* El tiempo maximo que se va a esperar el elemento*/
+    public boolean waitForElementIsVisivility(WebElement element , int timeout /* El tiempo maximo que se va a esperar el elemento*/
             , int pollingInterval /* Cada que tiempo se va a revisar si el elemento se encuentra disponible*/) {
         // WebDriverWait X
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
@@ -53,7 +53,7 @@ public class WaitsHelpers {
 
         return wait.until(new Function<WebDriver, Boolean>() {
             public Boolean apply(WebDriver driver) {
-                return driver.findElement(locator).isEnabled();
+                return element.isDisplayed();
             }
         });
     }
